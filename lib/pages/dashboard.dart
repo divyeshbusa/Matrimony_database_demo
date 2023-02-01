@@ -67,6 +67,8 @@ class _DashBoardState extends State<DashBoard>
           backgroundColor: Colors.pink,
           elevation: 10,
           shape: ContinuousRectangleBorder(
+            side: BorderSide(
+                color: Colors.black, strokeAlign: StrokeAlign.outside),
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(100),
             ),

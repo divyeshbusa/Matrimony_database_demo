@@ -49,20 +49,32 @@ class _UserListState extends State<UserList> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          elevation: 5,
-          foregroundColor: Colors.pinkAccent,
-          title: Row(
-            children: [
-              Text(
-                'User List',
-                style: GoogleFonts.archivo(
-                  color: Colors.pinkAccent,
-                  fontSize: 24,
-                ),
-              ),
-            ],
+          backgroundColor: Colors.pink,
+          elevation: 10,
+          shape: ContinuousRectangleBorder(
+            side: BorderSide(
+                color: Colors.black, strokeAlign: StrokeAlign.outside),
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(100),
+            ),
           ),
-          backgroundColor: Colors.grey.shade200,
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 45),
+                    child: Text(
+                      'USER LIST',
+                      style: GoogleFonts.montserratAlternates(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ]),
+          ),
         ),
         body: Container(
           margin: EdgeInsets.only(top: 20),
@@ -181,8 +193,8 @@ class _UserListState extends State<UserList> {
                                           onTap: () {
                                             setState(() {
                                               searchList[index].IsFavourite =
-                                              !searchList[index]
-                                                  .IsFavourite;
+                                                  !searchList[index]
+                                                      .IsFavourite;
                                             });
                                             print(
                                                 '::::::::::1!!!!${searchList[index].IsFavourite}');
@@ -191,7 +203,6 @@ class _UserListState extends State<UserList> {
                                                 !searchList[index].IsFavourite);
                                             print(
                                                 '::::::::::2!!!${searchList[index].IsFavourite}');
-
                                           },
                                           child: Icon(
                                             searchList[index].IsFavourite

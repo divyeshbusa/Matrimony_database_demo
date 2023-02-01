@@ -43,20 +43,32 @@ class _maleUserState extends State<maleUser> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          elevation: 5,
-          foregroundColor: Colors.pinkAccent,
-          title: Row(
-            children: [
-              Text(
-                'MALE',
-                style: GoogleFonts.archivo(
-                  color: Colors.pinkAccent,
-                  fontSize: 24,
-                ),
-              ),
-            ],
+          backgroundColor: Colors.pink,
+          elevation: 10,
+          shape: ContinuousRectangleBorder(
+            side: BorderSide(
+                color: Colors.black, strokeAlign: StrokeAlign.outside),
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(100),
+            ),
           ),
-          backgroundColor: Colors.grey.shade200,
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 45),
+                    child: Text(
+                      'MALE',
+                      style: GoogleFonts.montserratAlternates(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ]),
+          ),
         ),
         body: Container(
           margin: EdgeInsets.only(top: 20),
