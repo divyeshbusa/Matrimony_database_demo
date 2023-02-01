@@ -39,8 +39,7 @@ class _DashBoardState extends State<DashBoard>
   List<Icon> cardIcon = [
     Icon(CupertinoIcons.list_dash, color: Color(0xFFCB84FB), size: 100),
     Icon(Icons.favorite, color: Colors.pinkAccent, size: 100),
-    Icon(Icons.male,
-        color: CupertinoColors.activeGreen, size: 100),
+    Icon(Icons.male, color: CupertinoColors.activeGreen, size: 100),
     Icon(Icons.female, color: Color(0xFFFC7F7F), size: 100),
   ];
 
@@ -63,64 +62,136 @@ class _DashBoardState extends State<DashBoard>
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(backgroundColor: Colors.grey[300],
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.pink,
+          elevation: 10,
+          shape: ContinuousRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(100),
+            ),
+          ),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 45),
+                    child: Text(
+                      'Dashboard',
+                      style: GoogleFonts.montserratAlternates(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ]),
+          ),
+        ),
+        drawer: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                        child: Text(
+                      'and so the',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontFamily: 'GreatVibes-Regular',
+                          shadows: [
+                            Shadow(
+                              blurRadius: 10.0,
+                              color: Colors.black38,
+                              offset: Offset(5, 5),
+                            ),
+                          ]),
+                    )),
+                    Center(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Adventure begins...',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 40,
+                              fontFamily: 'GreatVibes-Regular',
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 10.0,
+                                  // color of the shadow
+                                  color: Colors.black38,
+                                  offset: Offset(5, 5),
+                                ),
+                              ]),
+                        ),
+                        Text(
+                          '🤍',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontFamily: 'GreatVibes-Regular',
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 10.0,
+                                  // color of the shadow
+                                  color: Colors.black38,
+                                  offset: Offset(5, 5),
+                                ),
+                              ]),
+                        ),
+                      ],
+                    )),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.pink,
+                ),
+              ),
+              ListTile(
+                title: Text('ADD USER'),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AddUser(
+                        model: null,
+                      ),
+                    ),
+                  );
+                },
+              ),
+              // ListTile(
+              //   title: Text('Item 2'),
+              //   onTap: () {
+              //     // Update the state of the app
+              //     // ...
+              //     // Then close the drawer
+              //     Navigator.pop(context);
+              //   },
+              // ),
+            ],
+          ),
+        ),
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.vertical(bottom: Radius.circular(25)),
-                  // color: Colors.grey[300],
-                ),
-
-                padding: EdgeInsets.only(left: 15),
-                // padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Text(
-                          'Dashboard',
-                          style: GoogleFonts.montserratAlternates(
-                              color: Colors.pinkAccent,
-                              fontSize: 35,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => AddUser(
-                                  model: null,
-                                ),
-                              ),
-                            );
-
-                        },
-                        child: Stack(
-                          children: [
-                            Lottie.asset('assets/images/profile_animation.json',
-                                controller: _controller, height: 85),
-                            Container(
-                                margin: EdgeInsets.fromLTRB(10, 60, 0, 0),
-                                child: Text(
-                                  'Add User',
-                                  style: GoogleFonts.montserratAlternates(
-                                      color: Colors.pinkAccent,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                          ],
-                        ),
-                      ),
-                    ]),
+              SizedBox(
+                height: 100,
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(20, 100, 20, 20),
+                margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 child: GridView.builder(
                     shrinkWrap: true,
                     itemCount: cardName.length,
@@ -168,14 +239,13 @@ class _DashBoardState extends State<DashBoard>
                                   builder: (context) => femaleUser(),
                                 ));
                           }
-
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               vertical: 10, horizontal: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.purple[100]),
+                              color: Colors.grey[300]),
                           child: Column(children: [
                             cardIcon[index],
                             SizedBox(height: 5),
