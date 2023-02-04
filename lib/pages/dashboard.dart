@@ -1,3 +1,4 @@
+import 'package:final_matrimony/Login_pages/login_page.dart';
 import 'package:final_matrimony/pages/add_user.dart';
 
 import 'package:final_matrimony/pages/favourite_user_list.dart';
@@ -5,12 +6,13 @@ import 'package:final_matrimony/pages/female_user_list.dart';
 import 'package:final_matrimony/pages/male_user_list.dart';
 import 'package:final_matrimony/pages/user_list.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 
 class DashBoard extends StatefulWidget {
+  const DashBoard({super.key});
+
   @override
   State<DashBoard> createState() => _DashBoardState();
 }
@@ -24,7 +26,7 @@ class _DashBoardState extends State<DashBoard>
     super.initState();
 
     _controller =
-        AnimationController(duration: Duration(seconds: 1), vsync: this);
+        AnimationController(duration: const Duration(seconds: 1), vsync: this);
   }
 
   @override
@@ -37,10 +39,10 @@ class _DashBoardState extends State<DashBoard>
   bool bookmarked = false;
 
   List<Icon> cardIcon = [
-    Icon(CupertinoIcons.list_dash, color: Color(0xFFCB84FB), size: 100),
-    Icon(Icons.favorite, color: Colors.pinkAccent, size: 100),
-    Icon(Icons.male, color: CupertinoColors.activeGreen, size: 100),
-    Icon(Icons.female, color: Color(0xFFFC7F7F), size: 100),
+    const Icon(CupertinoIcons.list_dash, color: Color(0xFFCB84FB), size: 100),
+    const Icon(Icons.favorite, color: Colors.pinkAccent, size: 100),
+    const Icon(Icons.male, color: CupertinoColors.activeGreen, size: 100),
+    const Icon(Icons.female, color: Color(0xFFFC7F7F), size: 100),
   ];
 
   List cardName = [
@@ -51,10 +53,10 @@ class _DashBoardState extends State<DashBoard>
   ];
 
   List<Color> cardColor = [
-    Color(0xFFCB84FB),
-    Color(0xFF6FFF8D),
-    Color(0xFF61BDFD),
-    Color(0xFFFC7F7F),
+    const Color(0xFFCB84FB),
+    const Color(0xFF6FFF8D),
+    const Color(0xFF61BDFD),
+    const Color(0xFFFC7F7F),
   ];
 
   TextEditingController controller = TextEditingController();
@@ -66,7 +68,7 @@ class _DashBoardState extends State<DashBoard>
         appBar: AppBar(
           backgroundColor: Colors.pink,
           elevation: 10,
-          shape: ContinuousRectangleBorder(
+          shape: const ContinuousRectangleBorder(
             side: BorderSide(
                 color: Colors.black, strokeAlign: StrokeAlign.outside),
             borderRadius: BorderRadius.vertical(
@@ -79,7 +81,7 @@ class _DashBoardState extends State<DashBoard>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(left: 45),
+                    padding: const EdgeInsets.only(left: 45),
                     child: Text(
                       'Dashboard',
                       style: GoogleFonts.montserratAlternates(
@@ -100,10 +102,14 @@ class _DashBoardState extends State<DashBoard>
             padding: EdgeInsets.zero,
             children: <Widget>[
               DrawerHeader(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white70),
+                  color: Colors.pink[500],
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Center(
+                    const Center(
                         child: Text(
                       'and so the',
                       style: TextStyle(
@@ -121,7 +127,7 @@ class _DashBoardState extends State<DashBoard>
                     Center(
                         child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Text(
                           'Adventure begins...',
                           style: TextStyle(
@@ -142,7 +148,6 @@ class _DashBoardState extends State<DashBoard>
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 25,
-                              fontFamily: 'GreatVibes-Regular',
                               shadows: [
                                 Shadow(
                                   blurRadius: 10.0,
@@ -156,12 +161,58 @@ class _DashBoardState extends State<DashBoard>
                     )),
                   ],
                 ),
-                decoration: BoxDecoration(
-                  color: Colors.pink,
-                ),
               ),
               ListTile(
-                title: Text('ADD USER'),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.pink),
+                      height: 40,
+                      width: 40,
+                      child: const Icon(
+                        Icons.person,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(width: 30),
+                    const Text(
+                      'Profile',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.pink),
+                      height: 40,
+                      width: 40,
+                      child: const Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(width: 30),
+                    const Text(
+                      'Add User',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -172,15 +223,34 @@ class _DashBoardState extends State<DashBoard>
                   );
                 },
               ),
-              // ListTile(
-              //   title: Text('Item 2'),
-              //   onTap: () {
-              //     // Update the state of the app
-              //     // ...
-              //     // Then close the drawer
-              //     Navigator.pop(context);
-              //   },
-              // ),
+              ListTile(
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.pink),
+                      height: 40,
+                      width: 40,
+                      child: const Icon(
+                        Icons.logout_outlined,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(width: 30),
+                    const Text(
+                      'Log Out',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => loginPage()),
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -189,19 +259,20 @@ class _DashBoardState extends State<DashBoard>
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              SizedBox(
-                height: 100,
+              const SizedBox(
+                height: 120,
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                 child: GridView.builder(
                     shrinkWrap: true,
                     itemCount: cardName.length,
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
-                        crossAxisCount: 2),
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            crossAxisCount: 2),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
@@ -243,17 +314,17 @@ class _DashBoardState extends State<DashBoard>
                           }
                         },
                         child: Container(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Colors.grey[300]),
                           child: Column(children: [
                             cardIcon[index],
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text(
                               cardName[index],
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.black87,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18),

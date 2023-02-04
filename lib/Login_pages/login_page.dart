@@ -1,146 +1,167 @@
+import 'package:final_matrimony/Componets/my_button.dart';
+import 'package:final_matrimony/Componets/my_textfield.dart';
+import 'package:final_matrimony/Componets/sqare_tile.dart';
 import 'package:final_matrimony/pages/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class loginPage extends StatefulWidget {
-  @override
-  State<loginPage> createState() => _loginPageState();
-}
+class loginPage extends StatelessWidget {
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
-class _loginPageState extends State<loginPage> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
-      child: Scaffold(
-        backgroundColor: Colors.grey[300],
-        body: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                    width: 300,
-                    child: Lottie.asset(
-                        'assets/images/splash_screen_proposal.json')),
-                Text(
-                  'MATCH MAKING',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 38,
-                  ),
+    return Scaffold(
+      backgroundColor: Colors.grey[300],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              Container(
+                  child:
+                      Lottie.asset('assets/images/splash_screen_proposal.json'),
+                  height: 230),
+              Text(
+                'MATCH MAKING',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 38,
                 ),
-                SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Find Your ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    '" Someone Special "',
+                    style: TextStyle(
+                      color: Colors.pinkAccent,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 25),
+              MyTextField(
+                  controller: usernameController,
+                  hintText: "Username",
+                  obscureText: false),
+              SizedBox(height: 15),
+              MyTextField(
+                  controller: passwordController,
+                  hintText: "Password",
+                  obscureText: true),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.only(right: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'Find Your ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),
-                    ),
-                    Text(
-                      '" Someone Special "',
-                      style: TextStyle(
-                        color: Colors.pinkAccent,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
-                      ),
+                      'Forgot Password?',
+                      style: TextStyle(color: Colors.pink),
                     ),
                   ],
                 ),
-                SizedBox(height: 35),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.pinkAccent),
-                      borderRadius: BorderRadius.circular(20),
+              ),
+              SizedBox(height: 20),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 30),
+              //   child: GestureDetector(
+              //     onTap: () {
+              //       Navigator.of(context).push(
+              //         MaterialPageRoute(
+              //           builder: (context) => DashBoard(),
+              //         ),
+              //       );
+              //     },
+              //     child: Container(
+              //       padding: EdgeInsets.all(20),
+              //       decoration: BoxDecoration(
+              //           color: Colors.pinkAccent,
+              //           borderRadius: BorderRadius.circular(20)),
+              //       child: Center(
+              //         child: Text(
+              //           'Sign in',
+              //           style: TextStyle(
+              //             color: Colors.white,
+              //             fontWeight: FontWeight.bold,
+              //             fontSize: 18,
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              MyButton(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => DashBoard(),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 25),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          labelText: "Email",
-                          labelStyle: TextStyle(color: Colors.pinkAccent),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.pinkAccent),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 25),
-                      child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          labelText: "Password",
-                          labelStyle: TextStyle(color: Colors.pinkAccent),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => DashBoard(),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                          color: Colors.pinkAccent,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Center(
-                        child: Text(
-                          'Sign in',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 25),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  );
+                },
+              ),
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Row(
                   children: [
+                    Expanded(
+                        child: Divider(
+                      thickness: 0.5,
+                      color: Colors.pink[400],
+                    )),
                     Text(
-                      'Not a member ?',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      ' Register',
+                      'Or Continue With',
                       style: TextStyle(
                           color: Colors.pinkAccent,
                           fontWeight: FontWeight.bold),
-                    )
+                    ),
+                    Expanded(
+                        child: Divider(
+                      thickness: 0.5,
+                      color: Colors.pink[400],
+                    )),
                   ],
                 ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SquareTile(imagepath: 'assets/images/google.png'),
+                  SizedBox(width: 25),
+                  SquareTile(imagepath: 'assets/images/apple.png'),
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Not a member ?',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    ' Register Now',
+                    style: TextStyle(
+                        color: Colors.pinkAccent, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ],
           ),
         ),
       ),
