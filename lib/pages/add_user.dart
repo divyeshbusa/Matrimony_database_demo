@@ -1,11 +1,13 @@
 import 'dart:math';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:final_matrimony/Componets/my_textfield.dart';
 import 'package:final_matrimony/Models/city_model.dart';
 import 'package:final_matrimony/Models/gender_model.dart';
 import 'package:final_matrimony/Models/user_list_model.dart';
 import 'package:final_matrimony/database/database.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class AddUser extends StatefulWidget {
@@ -54,180 +56,103 @@ class _AddUserState extends State<AddUser> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
-          backgroundColor: Colors.pinkAccent,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Add User',
-                style: TextStyle(color: Colors.grey.shade300, fontSize: 25),
-              ),
-            ],
+          iconTheme: IconThemeData(
+            color: Colors.pink,
+          ),
+          backgroundColor: Colors.white,
+          elevation: 10,
+          shape: const ContinuousRectangleBorder(
+            side: BorderSide(
+                color: Colors.black, strokeAlign: StrokeAlign.outside),
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(100),
+            ),
+          ),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(left: 45),
+                    child: Text(
+                      'Add User',
+                      style: GoogleFonts.montserratAlternates(
+                          color: Colors.pink,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ]),
           ),
         ),
         body: Form(
           key: _formKey,
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 20),
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                child: FutureBuilder<List<CityModel>>(
-                  builder: (context, snapshot) {
-                    if (snapshot.data != null || snapshot.hasData) {
-                      if (isGetCity) {
-                        modelC = snapshot.data![0];
-                      }
-
-                      return DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                          items: snapshot.data!
-                              .map((item) => DropdownMenuItem<CityModel?>(
-                                    value: item,
-                                    child: Text(
-                                      item.CityName.toString(),
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.pinkAccent,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ))
-                              .toList(),
-                          value: modelC,
-                          onChanged: (value) {
-                            setState(() {
-                              isGetCity = false;
-                              modelC = value!;
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.arrow_forward_ios_outlined,
-                          ),
-                          iconSize: 20,
-                          buttonDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
-                            border: Border.all(color: Colors.black),
-                            color: Colors.grey.shade300,
-                          ),
-                        ),
-                      );
-                    } else {
-                      return Container();
-                    }
-                  },
-                  future: isGetCity ? myDatabase.getCityListFromTbl() : null,
-                ),
+          child: Container(height: double.infinity,
+            decoration: BoxDecoration(
+              gradient: RadialGradient(
+                colors: [
+                  Colors.pinkAccent,
+                  Colors.pinkAccent.shade700,
+                  Colors.pinkAccent.shade400,
+                  Colors.pink,
+                  Colors.pink.shade400,
+                  Colors.pink.shade300,
+                  Colors.pink.shade200,
+                  Colors.pink.shade100,
+                  Colors.purple.shade100,
+                  Colors.purple.shade200,
+                  Colors.purple.shade300,
+                  Colors.purple.shade400,
+                  Colors.purple,
+                  Colors.purpleAccent.shade400,
+                  Colors.purpleAccent.shade700,
+                  Colors.purpleAccent
+                ],
+                center: Alignment.topRight,
+                radius: 2.5,
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                child: Row(children: [
-                  Text(
-                    'Name : ',
-                    style: TextStyle(color: Colors.pinkAccent, fontSize: 20),
-                  ),
-                  SizedBox(width: 31),
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: Colors.pinkAccent),),
-                      child: TextFormField(
-                        controller: nameController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.all(10),
-
-                        ),
-                        validator: (value) {
-                          if (value == null || value!.trim().length == 0) {
-                            return 'Enter Valid Name';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                  ),
-                ]),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                child: Row(children: [
-                  Text(
-                    'Phone No : ',
-                    style: TextStyle(color: Colors.pinkAccent, fontSize: 20),
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: Colors.pinkAccent),),
-                      child: TextFormField(
-                        controller: phoneController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.all(10),
-
-                        ),
-                        validator: (value) {
-                          if (value == null || value!.trim().length == 0) {
-                            return 'Enter Valid PhoneNo.';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                  ),
-                ]),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+            ),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
                 children: [
+                  SizedBox(height: 60,),
                   Container(
+
                     margin: EdgeInsets.only(top: 20),
+                    width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    child: FutureBuilder<List<GenderModel>>(
+                    child: FutureBuilder<List<CityModel>>(
                       builder: (context, snapshot) {
                         if (snapshot.data != null || snapshot.hasData) {
-                          if (isGetGender) {
-                            modelG = snapshot.data![0];
+                          if (isGetCity) {
+                            modelC = snapshot.data![0];
                           }
 
                           return DropdownButtonHideUnderline(
                             child: DropdownButton2(
                               items: snapshot.data!
-                                  .map((item) => DropdownMenuItem<GenderModel?>(
+                                  .map((item) => DropdownMenuItem<CityModel?>(
                                         value: item,
                                         child: Text(
-                                          item.GenderType.toString(),
+                                          item.CityName.toString(),
                                           style: const TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.pinkAccent,
+                                            color: Colors.black87,
                                           ),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ))
                                   .toList(),
-                              value: modelG,
+                              value: modelC,
                               onChanged: (value) {
                                 setState(() {
-                                  isGetGender = false;
-                                  modelG = value!;
+                                  isGetCity = false;
+                                  modelC = value!;
                                 });
                               },
                               icon: const Icon(
@@ -237,7 +162,7 @@ class _AddUserState extends State<AddUser> {
                               buttonDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(14),
                                 border: Border.all(color: Colors.black),
-                                color: Colors.grey.shade300,
+                                color: Colors.white60,
                               ),
                             ),
                           );
@@ -245,86 +170,176 @@ class _AddUserState extends State<AddUser> {
                           return Container();
                         }
                       },
-                      future: isGetGender ? myDatabase.getGenderDetail() : null,
+                      future: isGetCity ? myDatabase.getCityListFromTbl() : null,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 20),
+                    child: Row(children: [
+                      Text(
+                        'Name : ',
+                        style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold,fontSize: 20),
+                      ),
+                      SizedBox(width: 35),
+                      Expanded(
+                        child: MyTextField(controller: nameController, hintText: " ", obscureText: false),
+                      ),
+                    ]),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 20),
+                    child: Row(children: [
+                      Text(
+                        'Phone No : ',
+                        style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold,fontSize: 20),
+                      ),
+                      Expanded(
+                        child: MyTextField(controller: phoneController, hintText: " ", obscureText: false),
+                      ),
+                    ]),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 20),
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        child: FutureBuilder<List<GenderModel>>(
+                          builder: (context, snapshot) {
+                            if (snapshot.data != null || snapshot.hasData) {
+                              if (isGetGender) {
+                                modelG = snapshot.data![0];
+                              }
+
+                              return DropdownButtonHideUnderline(
+                                child: DropdownButton2(
+                                  items: snapshot.data!
+                                      .map((item) => DropdownMenuItem<GenderModel?>(
+                                            value: item,
+                                            child: Text(
+                                              item.GenderType.toString(),
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black87,
+                                              ),
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ))
+                                      .toList(),
+                                  value: modelG,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isGetGender = false;
+                                      modelG = value!;
+                                    });
+                                  },
+                                  icon: const Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                  ),
+                                  iconSize: 20,
+                                  buttonDecoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(14),
+                                    border: Border.all(color: Colors.black),
+                                    color: Colors.white60,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return Container();
+                            }
+                          },
+                          future: isGetGender ? myDatabase.getGenderDetail() : null,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 30),
+                  InkWell(
+                    onTap: () => _pickDateDialog(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'DATE OF BIRTH :',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                               getFormateddate(selectedDate),
+                              style: TextStyle(fontSize: 20),
+                            ),
+
+                          ],
+                        ),
+                        // Text('Enter Valid date.')
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        if (modelG.GenderID == -1) {
+                          print(':::::CALLING 1:::::::');
+                          showAlertDialog(context);
+                        } else {
+                          print(':::::CALLING 2:::::::');
+                          print(':::::GENDERID:::::::${modelU.Genderid}');
+                          print(':::::CALLING 2:::::::${modelU.PhoneNo}');
+                          myDatabase.upsertIntoUserTable(
+                            UserId:
+                                widget.model != null ? widget.model!.UserID : -1,
+                            CityName: modelC.CityID,
+                            UserName: nameController.text.toString(),
+                            Gender: modelG.GenderID,
+                            PhoneNo: phoneController.text.toString(),
+                            dob: selectedDate.toString(),
+                            isFavourite: false,
+                          );
+                          setState(() {});
+                          Navigator.of(context).pop();
+
+                        }
+                      }
+                      setState(() {});
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),border: Border.all(color: Colors.pink),
+                        color: Colors.white,
+                      ),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                            color: Colors.pink,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24),
+                      ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 25),
-              InkWell(
-                onTap: () => _pickDateDialog(),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'DATE OF BIRTH :',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.pinkAccent),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                           getFormateddate(selectedDate),
-                          style: TextStyle(fontSize: 20),
-                        ),
-
-                      ],
-                    ),
-                    // Text('Enter Valid date.')
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              InkWell(
-                onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    if (modelG.GenderID == -1) {
-                      print(':::::CALLING 1:::::::');
-                      showAlertDialog(context);
-                    } else {
-                      print(':::::CALLING 2:::::::');
-                      print(':::::GENDERID:::::::${modelU.Genderid}');
-                      print(':::::CALLING 2:::::::${modelU.PhoneNo}');
-                      myDatabase.upsertIntoUserTable(
-                        UserId:
-                            widget.model != null ? widget.model!.UserID : -1,
-                        CityName: modelC.CityID,
-                        UserName: nameController.text.toString(),
-                        Gender: modelG.GenderID,
-                        PhoneNo: phoneController.text.toString(),
-                        dob: selectedDate.toString(),
-                        isFavourite: false,
-                      );
-                      setState(() {});
-                      Navigator.of(context).pop();
-
-                    }
-                  }
-                  setState(() {});
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.pinkAccent,
-                  ),
-                  child: Text(
-                    'Submit',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

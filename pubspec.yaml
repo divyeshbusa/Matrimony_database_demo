@@ -70,7 +70,6 @@ flutter:
   assets:
     - assets/images/bg_matrimony_prelogin.jpg
     - assets/images/bridegroom.png
-    - assets/images/backgroud1.JPG
     - assets/images/Divyesh.jpeg
     - assets/images/Gopi.jpeg
     - assets/images/Uttam.jpeg
@@ -84,6 +83,8 @@ flutter:
     - assets/images/Nipul.jpeg
     - assets/images/apple.png
     - assets/images/google.png
+    - assets/images/background2.jpg
+    - assets/images/background1.jpg
     - assets/images/splash_screen_animation.json
     - assets/images/splash_screen_proposal.json
     - assets/images/profile_animation.json
