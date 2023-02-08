@@ -2,16 +2,18 @@ import 'package:final_matrimony/Models/user_list_model.dart';
 import 'package:final_matrimony/database/database.dart';
 import 'package:final_matrimony/pages/add_user.dart';
 import 'package:final_matrimony/pages/profile_detail.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// ignore: camel_case_types
 class femaleUser extends StatefulWidget {
+  const femaleUser({super.key});
+
   @override
   State<femaleUser> createState() => _femaleUserState();
 }
 
+// ignore: camel_case_types
 class _femaleUserState extends State<femaleUser> {
   MyDatabase db = MyDatabase();
   UserModel modelU = UserModel(
@@ -45,8 +47,7 @@ class _femaleUserState extends State<femaleUser> {
           backgroundColor: Colors.pink,
           elevation: 10,
           shape: ContinuousRectangleBorder(
-            side: BorderSide(
-                color: Colors.black, strokeAlign: StrokeAlign.outside),
+
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(100),
             ),
@@ -59,7 +60,7 @@ class _femaleUserState extends State<femaleUser> {
                   Container(
                     padding: EdgeInsets.only(left: 45),
                     child: Text(
-                      'FEMALE',
+                      'WOMEN',
                       style: GoogleFonts.montserratAlternates(
                           color: Colors.white,
                           fontSize: 30,

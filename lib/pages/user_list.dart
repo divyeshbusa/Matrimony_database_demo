@@ -52,8 +52,7 @@ class _UserListState extends State<UserList> {
           backgroundColor: Colors.pink,
           elevation: 10,
           shape: ContinuousRectangleBorder(
-            side: BorderSide(
-                color: Colors.black, strokeAlign: StrokeAlign.outside),
+
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(100),
             ),
@@ -69,7 +68,7 @@ class _UserListState extends State<UserList> {
                       'USER LIST',
                       style: GoogleFonts.montserratAlternates(
                           color: Colors.white,
-                          fontSize: 30,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -226,7 +225,7 @@ class _UserListState extends State<UserList> {
                                           },
                                           child: Icon(
                                             Icons.mode_edit_outline_sharp,
-                                            color: Colors.purpleAccent,
+                                            color: Colors.blueGrey,
                                             size: 25,
                                           ),
                                         ),

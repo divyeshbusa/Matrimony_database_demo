@@ -39,210 +39,217 @@ class _FavouriteUserState extends State<FavouriteUser> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.pink,
-          elevation: 10,
-          shape: ContinuousRectangleBorder(
-            side: BorderSide(
-                color: Colors.black, strokeAlign: StrokeAlign.outside),
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(100),
-            ),
+      child: Stack(
+        children: [
+          Image.asset(
+            "assets/images/background.jpeg",
+            fit: BoxFit.fill,
           ),
-          title: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(left: 45),
-                    child: Text(
-                      'FAVOURITE',
-                      style: GoogleFonts.montserratAlternates(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ]),
-          ),
-        ),
-        body: Container(
-          margin: EdgeInsets.only(top: 20),
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          child: FutureBuilder<List<UserModel>>(
-              builder: (context, snapshot) {
-                if (snapshot != null && snapshot.hasData) {
-                  if (isGetData) {
-                    localList.addAll(snapshot.data!);
-                    searchList.addAll(localList);
-                  }
-                  isGetData = false;
+          Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.pink,
+              elevation: 10,
+              shape: ContinuousRectangleBorder(
 
-                  return Column(
-                    mainAxisSize: MainAxisSize.max,
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(100),
+                ),
+              ),
+              title: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(1),
-                          border: Border.all(color: Colors.pinkAccent),
-                        ),
-                        child: TextField(
-                          style:
-                              TextStyle(color: Colors.pinkAccent, fontSize: 17),
-                          decoration: InputDecoration(
-                              border: InputBorder.none, hintText: 'Search'),
-                          controller: controller,
-                          onChanged: (value) {
-                            searchList.clear();
-                            for (int i = 0; i < localList.length; i++) {
-                              if (localList[i]
-                                  .UserName
-                                  .toLowerCase()
-                                  .contains(value.toLowerCase())) {
-                                searchList.add(localList[i]);
-
-                                print(
-                                    'SEARCHLIST::::LENGHTH::::${searchList.length}');
-                                print(
-                                    'LOCALLIST::::LENGHTH::::${localList[i]}');
-                              }
-                            }
-                            setState(() {});
-                          },
+                        padding: EdgeInsets.only(left: 45),
+                        child: Text(
+                          'FAVOURITE',
+                          style: GoogleFonts.montserratAlternates(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Expanded(
-                        child: ListView.builder(
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => ProfileDetail(
-                                      searchList[index].UserID as int,
-                                      searchList[index].UserName.toString(),
-                                      searchList[index].PhoneNo.toString(),
-                                      searchList[index].Cityid.toString(),
-                                      searchList[index].DOB.toString(),
-                                      searchList[index].IsFavourite,
+                    ]),
+              ),
+            ),
+            body: Container(
+              margin: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: FutureBuilder<List<UserModel>>(
+                  builder: (context, snapshot) {
+                    if (snapshot != null && snapshot.hasData) {
+                      if (isGetData) {
+                        localList.addAll(snapshot.data!);
+                        searchList.addAll(localList);
+                      }
+                      isGetData = false;
+
+                      return Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(1),
+                              border: Border.all(color: Colors.pinkAccent),
+                            ),
+                            child: TextField(
+                              style:
+                                  TextStyle(color: Colors.pinkAccent, fontSize: 17),
+                              decoration: InputDecoration(
+                                  border: InputBorder.none, hintText: 'Search'),
+                              controller: controller,
+                              onChanged: (value) {
+                                searchList.clear();
+                                for (int i = 0; i < localList.length; i++) {
+                                  if (localList[i]
+                                      .UserName
+                                      .toLowerCase()
+                                      .contains(value.toLowerCase())) {
+                                    searchList.add(localList[i]);
+
+                                    print(
+                                        'SEARCHLIST::::LENGHTH::::${searchList.length}');
+                                    print(
+                                        'LOCALLIST::::LENGHTH::::${localList[i]}');
+                                  }
+                                }
+                                setState(() {});
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 20),
+                          Expanded(
+                            child: ListView.builder(
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => ProfileDetail(
+                                          searchList[index].UserID as int,
+                                          searchList[index].UserName.toString(),
+                                          searchList[index].PhoneNo.toString(),
+                                          searchList[index].Cityid.toString(),
+                                          searchList[index].DOB.toString(),
+                                          searchList[index].IsFavourite,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Card(
+                                    margin: EdgeInsets.all(10),
+                                    elevation: 10,
+                                    shape: const OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.all(Radius.circular(10)),
+                                        borderSide: BorderSide(
+                                            color: Colors.pinkAccent, width: 2)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                searchList[index]
+                                                    .UserName
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                              SizedBox(height: 5),
+                                              Text(
+                                                'Phone No. :${searchList[index].PhoneNo.toString()}',
+                                                style: TextStyle(
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                              SizedBox(height: 2),
+                                            ],
+                                          ),
+                                          Row(children: [
+                                            InkWell(
+                                              onTap: () {
+                                                showAlertDialog(context, index);
+                                              },
+                                              child: const Icon(
+                                                Icons.delete_outline_outlined,
+                                                color: Colors.red,
+                                                size: 28,
+                                              ),
+                                            ),
+                                            SizedBox(width: 10),
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  searchList[index].IsFavourite =
+                                                      !searchList[index]
+                                                          .IsFavourite;
+                                                });
+                                                print(
+                                                    '::::::::::1!!!!${searchList[index].IsFavourite}');
+                                                db.favouriteUserFromUserTable(
+                                                    searchList[index].UserID,
+                                                    !searchList[index].IsFavourite);
+                                                print(
+                                                    '::::::::::2!!!${searchList[index].IsFavourite}');
+                                              },
+                                              child: Icon(
+                                                searchList[index].IsFavourite
+                                                    ? Icons.favorite
+                                                    : Icons
+                                                        .favorite_border_outlined,
+                                                color: Colors.pinkAccent,
+                                                size: 28,
+                                              ),
+                                            ),
+                                            SizedBox(width: 10),
+                                            InkWell(
+                                              onTap: () {
+                                                Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                    builder: (context) => AddUser(
+                                                      model: searchList[index],
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              child: Icon(
+                                                Icons.mode_edit_outline_sharp,
+                                                color: Colors.purpleAccent,
+                                                size: 25,
+                                              ),
+                                            ),
+                                            SizedBox(width: 5),
+                                          ]),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );
                               },
-                              child: Card(
-                                margin: EdgeInsets.all(10),
-                                elevation: 10,
-                                shape: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide: BorderSide(
-                                        color: Colors.pinkAccent, width: 2)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            searchList[index]
-                                                .UserName
-                                                .toString(),
-                                            style: TextStyle(
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(height: 5),
-                                          Text(
-                                            'Phone No. :${searchList[index].PhoneNo.toString()}',
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          SizedBox(height: 2),
-                                        ],
-                                      ),
-                                      Row(children: [
-                                        InkWell(
-                                          onTap: () {
-                                            showAlertDialog(context, index);
-                                          },
-                                          child: Icon(
-                                            Icons.delete_outline_outlined,
-                                            color: Colors.red,
-                                            size: 28,
-                                          ),
-                                        ),
-                                        SizedBox(width: 10),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              searchList[index].IsFavourite =
-                                                  !searchList[index]
-                                                      .IsFavourite;
-                                            });
-                                            print(
-                                                '::::::::::1!!!!${searchList[index].IsFavourite}');
-                                            db.favouriteUserFromUserTable(
-                                                searchList[index].UserID,
-                                                !searchList[index].IsFavourite);
-                                            print(
-                                                '::::::::::2!!!${searchList[index].IsFavourite}');
-                                          },
-                                          child: Icon(
-                                            searchList[index].IsFavourite
-                                                ? Icons.favorite
-                                                : Icons
-                                                    .favorite_border_outlined,
-                                            color: Colors.pinkAccent,
-                                            size: 28,
-                                          ),
-                                        ),
-                                        SizedBox(width: 10),
-                                        InkWell(
-                                          onTap: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) => AddUser(
-                                                  model: searchList[index],
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          child: Icon(
-                                            Icons.mode_edit_outline_sharp,
-                                            color: Colors.purpleAccent,
-                                            size: 25,
-                                          ),
-                                        ),
-                                        SizedBox(width: 5),
-                                      ]),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                          itemCount: searchList.length,
-                        ),
-                      ),
-                    ],
-                  );
-                } else {
-                  return Center(
-                    child: Text('USER NOT FOUND '),
-                  );
-                }
-              },
-              future: isGetData ? db.getDataOfFavouriteUser() : null),
-        ),
+                              itemCount: searchList.length,
+                            ),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Center(
+                        child: Text('USER NOT FOUND '),
+                      );
+                    }
+                  },
+                  future: isGetData ? db.getDataOfFavouriteUser() : null),
+            ),
+          ),
+        ],
       ),
     );
   }

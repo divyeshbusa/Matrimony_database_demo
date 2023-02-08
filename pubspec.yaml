@@ -83,8 +83,7 @@ flutter:
     - assets/images/Nipul.jpeg
     - assets/images/apple.png
     - assets/images/google.png
-    - assets/images/background2.jpg
-    - assets/images/background1.jpg
+    - assets/images/background.jpeg
     - assets/images/splash_screen_animation.json
     - assets/images/splash_screen_proposal.json
     - assets/images/profile_animation.json

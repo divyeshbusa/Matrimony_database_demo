@@ -53,7 +53,7 @@ class _DashBoardState extends State<DashBoard>
   ];
 
   List<Color> cardColor = [
-    const Color(0xFFCB84FB),
+    const Color(0xFF6FFF8D),
     const Color(0xFF6FFF8D),
     const Color(0xFF61BDFD),
     const Color(0xFFFC7F7F),
@@ -64,341 +64,381 @@ class _DashBoardState extends State<DashBoard>
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              "assets/images/background2.jpg",
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.blueGrey,
+          // elevation: 10,
+          shape: const ContinuousRectangleBorder(
+
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(100),
             ),
-            fit: BoxFit.cover,
+          ),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(left: 45),
+                    child: Text(
+                      'Dashboard',
+                      style: GoogleFonts.montserratAlternates(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ]),
           ),
         ),
-        child: Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            iconTheme: IconThemeData(
-              color: Colors.pink[500],
-            ),
-            backgroundColor: Colors.white,
-            elevation: 10,
-            shape: const ContinuousRectangleBorder(
-              side: BorderSide(
-                  color: Colors.black, strokeAlign: StrokeAlign.outside),
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(100),
-              ),
-            ),
-            title: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        drawer: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.only(left: 45),
-                      child: Text(
-                        'Dashboard',
-                        style: GoogleFonts.montserratAlternates(
-                            color: Colors.pink[500],
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ]),
-            ),
-          ),
-          drawer: Drawer(
-            // Add a ListView to the drawer. This ensures the user can scroll
-            // through the options in the drawer if there isn't enough vertical
-            // space to fit everything.
-            child: ListView(
-              // Important: Remove any padding from the ListView.
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                DrawerHeader(
-                  decoration: BoxDecoration(
-                    gradient: RadialGradient(
-                      colors: [
-                        Colors.pinkAccent,
-                        Colors.pink,
-                        Colors.purple,
-                        Colors.purpleAccent
-                      ],
-                      center: Alignment.topRight,
-                      radius: 2,
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Center(
-                          child: Text(
-                        'and so the',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 40,
-                            fontFamily: 'GreatVibes-Regular',
-                            shadows: [
-                              Shadow(
-                                blurRadius: 10.0,
-                                color: Colors.black38,
-                                offset: Offset(5, 5),
-                              ),
-                            ]),
-                      )),
-                      Center(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
-                            'Adventure begins...',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 40,
-                                fontFamily: 'GreatVibes-Regular',
-                                shadows: [
-                                  Shadow(
-                                    blurRadius: 10.0,
-                                    // color of the shadow
-                                    color: Colors.black38,
-                                    offset: Offset(5, 5),
-                                  ),
-                                ]),
-                          ),
-                          Text(
-                            '🤍',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                shadows: [
-                                  Shadow(
-                                    blurRadius: 10.0,
-                                    // color of the shadow
-                                    color: Colors.black38,
-                                    offset: Offset(5, 5),
-                                  ),
-                                ]),
-                          ),
-                        ],
-                      )),
-                    ],
-                  ),
-                ),
-                ListTile(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: Colors.pink),
-                        height: 40,
-                        width: 40,
-                        child: const Icon(
-                          Icons.person,
+                    const Center(
+                        child: Text(
+                      'and so the',
+                      style: TextStyle(
                           color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(width: 30),
-                      const Text(
-                        'Profile',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    // Update the state of the app
-                    // ...
-                    // Then close the drawer
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: Colors.pink),
-                        height: 40,
-                        width: 40,
-                        child: const Icon(
-                          Icons.add,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(width: 30),
-                      const Text(
-                        'Add User',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => AddUser(
-                          model: null,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                ListTile(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: Colors.pink),
-                        height: 40,
-                        width: 40,
-                        child: const Icon(
-                          Icons.logout_outlined,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(width: 30),
-                      const Text(
-                        'Log Out',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => loginPage()),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-          body: Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: RadialGradient(
-                colors: [
-                  Colors.pinkAccent,
-                  Colors.pinkAccent.shade700,
-                  Colors.pinkAccent.shade400,
-                  Colors.pink,
-                  Colors.pink.shade400,
-                  Colors.pink.shade300,
-                  Colors.pink.shade200,
-                  Colors.pink.shade100,
-                  Colors.purple.shade100,
-                  Colors.purple.shade200,
-                  Colors.purple.shade300,
-                  Colors.purple.shade400,
-                  Colors.purple,
-                  Colors.purpleAccent.shade400,
-                  Colors.purpleAccent.shade700,
-                  Colors.purpleAccent
-                ],
-                center: Alignment.topRight,
-                radius: 2.5,
-              ),
-            ),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 120,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                    child: GridView.builder(
-                        shrinkWrap: true,
-                        itemCount: cardName.length,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                mainAxisSpacing: 15,
-                                crossAxisSpacing: 15,
-                                crossAxisCount: 2),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              if (index == 0) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          UserList(cardName[index]),
-                                    ));
-                              }
-                              if (index == 1) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => FavouriteUser(),
-                                    ));
-                              }
-                              if (index == 2) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => maleUser(),
-                                    ));
-                              }
-                              if (index == 3) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => femaleUser(),
-                                    ));
-                              }
-                              if (index == 3) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => femaleUser(),
-                                    ));
-                              }
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black87,
-                                    offset: const Offset(
-                                      5.0,
-                                      5.0,
-                                    ),
-                                    blurRadius: 10.0,
-                                    spreadRadius: 2.0,
-                                  ),
-                                ],
-                                borderRadius: BorderRadius.circular(25),
-                                color: Colors.white,
-                              ),
-                              child: Column(children: [
-                                cardIcon[index],
-                                const SizedBox(height: 5),
-                                Text(
-                                  cardName[index],
-                                  style: const TextStyle(
-                                      color: Colors.black87,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
+                          fontSize: 40,
+                          fontFamily: 'GreatVibes-Regular',
+                          shadows: [
+                            Shadow(
+                              blurRadius: 10.0,
+                              color: Colors.black38,
+                              offset: Offset(5, 5),
+                            ),
+                          ]),
+                    )),
+                    Center(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'Adventure begins...',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 40,
+                              fontFamily: 'GreatVibes-Regular',
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 10.0,
+                                  // color of the shadow
+                                  color: Colors.black38,
+                                  offset: Offset(5, 5),
                                 ),
                               ]),
+                        ),
+                        Text(
+                          '🤍',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 10.0,
+                                  // color of the shadow
+                                  color: Colors.black38,
+                                  offset: Offset(5, 5),
+                                ),
+                              ]),
+                        ),
+                      ],
+                    )),
+                  ],
+                ),
+              ),
+              ListTile(
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.blueGrey),
+                      height: 40,
+                      width: 40,
+                      child: const Icon(
+                        Icons.person,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(width: 30),
+                    const Text(
+                      'Profile',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.blueGrey),
+                      height: 40,
+                      width: 40,
+                      child: const Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(width: 30),
+                    const Text(
+                      'Add User',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AddUser(
+                        model: null,
+                      ),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.blueGrey),
+                      height: 40,
+                      width: 40,
+                      child: const Icon(
+                        Icons.logout_outlined,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(width: 30),
+                    const Text(
+                      'Log Out',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => loginPage()),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.asset(
+              "assets/images/background.jpeg",
+              fit: BoxFit.fill,
+            ),
+            Center(
+              child: Container(
+                margin: EdgeInsets.fromLTRB(10, 130, 10, 10),
+                child: GridView(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UserList("img"),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        child: Card(
+                          color: Colors.white,
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                                child: Icon(
+                                  Icons.list,
+                                  size: 100,
+                                  color: Colors.blueGrey,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(30, 0, 25, 25),
+                                child: Text(
+                                  'User List',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FavouriteUser(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        child: Card(
+                          color: Colors.white,
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                                child: Icon(
+                                  Icons.favorite_outlined,
+                                  size: 100,
+                                  color: Colors.pink,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(30, 0, 25, 25),
+                                child: Text(
+                                  'Favourite',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => femaleUser(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        child: Card(
+                          color: Colors.white,
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                                child: Icon(
+                                  Icons.female_outlined,
+                                  size: 100,
+                                  color: Colors.blueGrey,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(30, 0, 25, 25),
+                                child: Text(
+                                  'Women',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => maleUser(),
                             ),
                           );
-                        }),
-                  )
-                ],
+                        },
+                      child: Container(
+                        child: Card(
+                          color: Colors.white,
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                                child: Icon(
+                                  Icons.male_outlined,
+                                  size: 100,
+                                  color: Colors.blueGrey,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(20, 0, 25, 25),
+                                child: Text(
+                                  'Men',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

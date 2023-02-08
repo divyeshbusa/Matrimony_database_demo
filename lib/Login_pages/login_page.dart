@@ -2,6 +2,7 @@ import 'package:final_matrimony/Componets/my_button.dart';
 import 'package:final_matrimony/Componets/my_textfield.dart';
 import 'package:final_matrimony/Componets/sqare_tile.dart';
 import 'package:final_matrimony/pages/dashboard.dart';
+import 'package:final_matrimony/pages/forgot_screen_design.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -63,14 +64,22 @@ class loginPage extends StatelessWidget {
               SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.only(right: 30),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: Colors.pink),
-                    ),
-                  ],
+                child: InkWell(onTap: () {Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ForgotScreen(),
+                  ),
+                );
+
+                },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Forgot Password?',
+                        style: TextStyle(color: Colors.pink),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 20),

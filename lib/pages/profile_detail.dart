@@ -1,20 +1,22 @@
 import 'package:final_matrimony/database/database.dart';
-import 'package:final_matrimony/pages/add_user.dart';
 import 'package:flutter/material.dart';
 
 class ProfileDetail extends StatefulWidget {
+  // ignore: non_constant_identifier_names
   String Name, phoneNo, CityName, DOB;
+  // ignore: non_constant_identifier_names
   int UserID;
   bool isFavourite;
 
   ProfileDetail(this.UserID, this.Name, this.phoneNo, this.CityName, this.DOB,
-      this.isFavourite);
+      this.isFavourite, {super.key});
 
   @override
   State<ProfileDetail> createState() => _ProfileDetailState();
 }
 
 class _ProfileDetailState extends State<ProfileDetail> {
+  // ignore: non_constant_identifier_names
   DateTime SelectedDate = DateTime.now();
   MyDatabase db = MyDatabase();
 

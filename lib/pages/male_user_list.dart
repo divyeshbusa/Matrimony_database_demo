@@ -46,8 +46,7 @@ class _maleUserState extends State<maleUser> {
           backgroundColor: Colors.pink,
           elevation: 10,
           shape: ContinuousRectangleBorder(
-            side: BorderSide(
-                color: Colors.black, strokeAlign: StrokeAlign.outside),
+
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(100),
             ),
