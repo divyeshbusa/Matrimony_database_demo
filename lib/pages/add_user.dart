@@ -185,7 +185,7 @@ class _AddUserState extends State<AddUser> {
                       ),
                       SizedBox(width: 35),
                       Expanded(
-                        child: MyTextField(controller: nameController, hintText: " ", obscureText: false),
+                        child: MyTextField(controller: nameController, hintText: " ", obscureText: false,onChange: (){}),
                       ),
                     ]),
                   ),
@@ -200,7 +200,7 @@ class _AddUserState extends State<AddUser> {
                         style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold,fontSize: 20),
                       ),
                       Expanded(
-                        child: MyTextField(controller: phoneController, hintText: " ", obscureText: false),
+                        child: MyTextField(controller: phoneController, hintText: " ", obscureText: false,onChange: (){}),
                       ),
                     ]),
                   ),

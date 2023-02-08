@@ -1,3 +1,4 @@
+import 'package:final_matrimony/Componets/my_textfield.dart';
 import 'package:final_matrimony/Models/user_list_model.dart';
 import 'package:final_matrimony/database/database.dart';
 import 'package:final_matrimony/pages/add_user.dart';
@@ -39,42 +40,44 @@ class _FavouriteUserState extends State<FavouriteUser> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Stack(
-        children: [
-          Image.asset(
-            "assets/images/background.jpeg",
-            fit: BoxFit.fill,
-          ),
-          Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.pink,
-              elevation: 10,
-              shape: ContinuousRectangleBorder(
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.pink,
+          elevation: 10,
+          shape: ContinuousRectangleBorder(
 
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(100),
-                ),
-              ),
-              title: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 45),
-                        child: Text(
-                          'FAVOURITE',
-                          style: GoogleFonts.montserratAlternates(
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ]),
-              ),
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(100),
             ),
-            body: Container(
-              margin: EdgeInsets.only(top: 20),
+          ),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 45),
+                    child: Text(
+                      'FAVOURITE',
+                      style: GoogleFonts.montserratAlternates(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ]),
+          ),
+        ),
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            Image.asset(
+              "assets/images/background.jpeg",
+              fit: BoxFit.fill,
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 80),
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: FutureBuilder<List<UserModel>>(
                   builder: (context, snapshot) {
@@ -88,38 +91,55 @@ class _FavouriteUserState extends State<FavouriteUser> {
                       return Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Container(
-                            padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(1),
-                              border: Border.all(color: Colors.pinkAccent),
-                            ),
-                            child: TextField(
-                              style:
-                                  TextStyle(color: Colors.pinkAccent, fontSize: 17),
-                              decoration: InputDecoration(
-                                  border: InputBorder.none, hintText: 'Search'),
-                              controller: controller,
-                              onChanged: (value) {
-                                searchList.clear();
-                                for (int i = 0; i < localList.length; i++) {
-                                  if (localList[i]
-                                      .UserName
-                                      .toLowerCase()
-                                      .contains(value.toLowerCase())) {
-                                    searchList.add(localList[i]);
+                          MyTextField(controller: controller, hintText: "Search", obscureText: false,onChange: (value) {
+                            searchList.clear();
+                            for (int i = 0; i < localList.length; i++) {
+                              if (localList[i]
+                                  .UserName
+                                  .toLowerCase()
+                                  .contains(value.toLowerCase())) {
+                                searchList.add(localList[i]);
 
-                                    print(
-                                        'SEARCHLIST::::LENGHTH::::${searchList.length}');
-                                    print(
-                                        'LOCALLIST::::LENGHTH::::${localList[i]}');
-                                  }
-                                }
-                                setState(() {});
-                              },
-                            ),
-                          ),
-                          SizedBox(height: 20),
+                                print(
+                                    'SEARCHLIST::::LENGHTH::::${searchList.length}');
+                                print(
+                                    'LOCALLIST::::LENGHTH::::${localList[i]}');
+                              }
+                            }
+                            setState(() {});
+                          },),
+                          // Container(
+                          //   padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(1),
+                          //     border: Border.all(color: Colors.pinkAccent),
+                          //   ),
+                          //   child: TextField(
+                          //     style:
+                          //         TextStyle(color: Colors.pinkAccent, fontSize: 17),
+                          //     decoration: InputDecoration(
+                          //         border: InputBorder.none, hintText: 'Search'),
+                          //     controller: controller,
+                          //     onChanged: (value) {
+                          //       searchList.clear();
+                          //       for (int i = 0; i < localList.length; i++) {
+                          //         if (localList[i]
+                          //             .UserName
+                          //             .toLowerCase()
+                          //             .contains(value.toLowerCase())) {
+                          //           searchList.add(localList[i]);
+                          //
+                          //           print(
+                          //               'SEARCHLIST::::LENGHTH::::${searchList.length}');
+                          //           print(
+                          //               'LOCALLIST::::LENGHTH::::${localList[i]}');
+                          //         }
+                          //       }
+                          //       setState(() {});
+                          //     },
+                          //   ),
+                          // ),
+
                           Expanded(
                             child: ListView.builder(
                               itemBuilder: (context, index) {
@@ -248,8 +268,8 @@ class _FavouriteUserState extends State<FavouriteUser> {
                   },
                   future: isGetData ? db.getDataOfFavouriteUser() : null),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
